@@ -25,3 +25,5 @@ public class CameraMovement : MonoBehaviour {
 		//Debug.Log (player.);
 	}
 }
+
+//hello 
