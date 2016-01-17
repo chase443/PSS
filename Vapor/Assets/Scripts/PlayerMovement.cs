@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float terminalVelocity = -10f;
 
 	private CharacterController _charController;
+	private ControllerColliderHit _contact;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,12 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*bool hitGround = false;
+		RaycastHit hit;
+		if(_vertSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit){
+			float checked = (_charController
+		} */
+
 		float deltaX = Input.GetAxis ("Horizontal") * speed;
 		Vector3 movement = new Vector3 (deltaX, 0, 0);
 		movement = Vector3.ClampMagnitude (movement, speed);
