@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyWander : MonoBehaviour {
+public class EnemyMoveForward : MonoBehaviour {
 	
 	public float speed = 3.0f;
 	
