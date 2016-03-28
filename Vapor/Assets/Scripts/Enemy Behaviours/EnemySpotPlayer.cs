@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemySpotPlayer : MonoBehaviour {
 
+	//public Enemy thisEnemy;
 	public Transform sightEnd_Point;
 	public GameObject arrow; //visual for when player is spotted 
 	//public float repeat;
@@ -12,6 +13,7 @@ public class EnemySpotPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+	//	Debug.Log(thisEnemy);
 		//InvokeRepeating ("patrol",2f,repeat);	//call function 'patrol' 2 seconds after start, and every 2 seconds
 	}
 
@@ -30,6 +32,18 @@ public class EnemySpotPlayer : MonoBehaviour {
 		//activate I see you arrow
 		if (spotted.collider != null) {
 			arrow.SetActive(true);
+
+			PlayerControl playerControl = spotted.collider.gameObject.GetComponent("PlayerControl") as PlayerControl;
+			GetComponent<WanderReaper>().UpdateState("seek", playerControl);
+			//playerControl.detected();
+
+			//Transform playerTrans = spotted.collider.gameObject.GetComponent("Transform") as Transform;
+			//Debug.Log(playerTrans.transform.position.x);
+
+			//GetComponent<EnemyWander>().stopMovement();
+			//EnemyWander enemyWander = GetComponent<EnemyWander>();
+			//enemyWander.stopMovement ();
+
 		} else {
 			arrow.SetActive(false);
 		}
@@ -43,14 +57,6 @@ public class EnemySpotPlayer : MonoBehaviour {
 		}
 
 	}
-/*
-	void patrol(){
-		//flip direction facing (left and right)
-		facingLeft = !facingLeft;
-		if (facingLeft) {
-			transform.eulerAngles = new Vector2 (0, 0);
-		} else {
-			transform.eulerAngles = new Vector2 (0,180);
-		}
-	}*/
+
+
 }
