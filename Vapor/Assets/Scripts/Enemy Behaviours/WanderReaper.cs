@@ -10,7 +10,7 @@ public class WanderReaper : MonoBehaviour {
 	private bool movement = false;
 	private bool doSeek = false;
 	private Vector2 velocity;
-	private float smoothTimeX = 30.0f;
+	private float smoothTimeX = 3.0f;
 
 	private float minX_Offset=-0.5f;
 	private float maxX_Offset= 0.5f;
@@ -39,7 +39,8 @@ public class WanderReaper : MonoBehaviour {
 
 	public void startSeek(){
 		float posX = Mathf.SmoothDamp (transform.position.x, playerTrans.position.x, ref velocity.x, smoothTimeX);
-		
+		float offset = .005f;
+		posX = posX * offset;
 		float minX = playerTrans.position.x + minX_Offset;
 		float maxX = playerTrans.position.x + maxX_Offset;
 		
