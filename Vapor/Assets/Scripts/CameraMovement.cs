@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour {
 	public float maxY_Offset;
 
 
-	private Vector2 velocity;
+	private Vector2 velocity = new Vector2(20,20);
 	private float smoothTimeY = 0.05f;
 	private float smoothTimeX = 0.05f;
 
@@ -23,6 +23,7 @@ public class CameraMovement : MonoBehaviour {
 
 
 	void FixedUpdate(){
+		//smooth damp gradually changes value to target value over time
 		float posX = Mathf.SmoothDamp (transform.position.x, player.transform.position.x, ref velocity.x, smoothTimeX);
 		float posY = Mathf.SmoothDamp (transform.position.y, player.transform.position.y, ref velocity.y, smoothTimeY);
 
@@ -31,7 +32,13 @@ public class CameraMovement : MonoBehaviour {
 		float maxX = player.transform.position.x + maxX_Offset;
 		float maxY = player.transform.position.x + maxY_Offset;
 
-		transform.position = new Vector3 (Mathf.Clamp(posX,minX,maxX),Mathf.Clamp(posY,minY,maxY), transform.position.z);
+		Debug.Log("player pos " + player.transform.position.y);
+		Debug.Log("cam pos " + transform.position.y);
+
+		transform.position = new Vector3 (Mathf.Clamp(posX,minX,maxX),transform.position.y, transform.position.z);
+
+
+		//old y --> Mathf.Clamp(posY,minY,maxY)
 	}
 
 	// Update is called once per frame

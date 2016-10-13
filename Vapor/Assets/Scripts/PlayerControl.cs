@@ -6,6 +6,8 @@ public class PlayerControl : MonoBehaviour
 	public Transform jumpEnd_Point, interactEnd_Point; //points designating the end of the players jump, and end of players interact range
 	public float moveSpeed = 5f;
 	public LayerMask groundLayer, enemyLayer;
+	public Transform spawnPoint;
+
 
 	Animator animator;
 
@@ -27,6 +29,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		Movement(); 
 		RaycastStuff(); 
+
 	}
 
 	void RaycastStuff()
@@ -42,7 +45,7 @@ public class PlayerControl : MonoBehaviour
 
 		if(interacted.collider != null)
 		{
-			Debug.Log (interacted.collider.gameObject.layer);
+			//Debug.Log (interacted.collider.gameObject.layer);
 			//Stores infromation about what player has interacted with
 			interacted = Physics2D.Linecast(transform.position, interactEnd_Point.position, LayerMask.GetMask("Enemy")); 
 			_canInteract = true; //since the linecase is touching the guard and we are in range, we can now interact
@@ -63,6 +66,8 @@ public class PlayerControl : MonoBehaviour
 		if (hitDoor.collider != null) {
 			if (Input.GetKeyDown (KeyCode.E)) {
 				Application.LoadLevel("Level2");
+				transform.position = new Vector2(spawnPoint.position.x,spawnPoint.position.y);
+
 			}	
 		}
 
@@ -112,6 +117,11 @@ public class PlayerControl : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D coll) {
 		int spikesLayer = 13;
 		if (coll.gameObject.layer == spikesLayer) {
+			Destroy (gameObject);
+		}
+
+		int enemyLayer = 11;
+		if (coll.gameObject.layer == enemyLayer) {
 			Destroy (gameObject);
 		}
 	}
